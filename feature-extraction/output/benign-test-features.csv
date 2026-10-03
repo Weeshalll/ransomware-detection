@@ -1,0 +1,2 @@
+session_id,label,session_duration_sec,total_events,write_count,read_count,rename_count,delete_count,files_modified_per_sec,unique_files_touched,unique_dirs_touched,overwrite_ratio,extension_change_count,extension_change_ratio,mean_entropy_delta,max_entropy_delta,sequential_score,max_files_per_10sec
+benign-test-001,0,14.424,5,3,2,0,0,0.208,4,3,0.6,0,0.0,0.0,0.0,0.6,3

@@ -14,8 +14,9 @@ Signature   = "$Windows NT$"
 Class       = "ActivityMonitor"
 ClassGuid   = {b86dff51-a31e-4bac-b3cf-e8cfe75c9fc2}
 Provider    = %ManufacturerName%
-DriverVer   = 01/01/2026,1.0.0.0
+DriverVer   = 10/02/2026,1.0.0.0
 CatalogFile = RansomDet.cat
+PnpLockdown = 1
 
 ; ── DestinationDirs ───────────────────────────────────────────────────────────
 [DestinationDirs]
@@ -39,6 +40,7 @@ AddService = %ServiceName%,,RansomDet.Service
 
 ; ── Default uninstall ─────────────────────────────────────────────────────────
 [DefaultUninstall.NT$ARCH$]
+LegacyUninstall = 1
 DelFiles   = RansomDet.DriverFiles
 
 [DefaultUninstall.NT$ARCH$.Services]

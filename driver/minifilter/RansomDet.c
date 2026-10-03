@@ -72,27 +72,29 @@ KSPIN_LOCK gQueueLock;
 /* ══════════════════════════════════════════════════════════════════════════════
  * HELPER: Get the name of the current process
  * ══════════════════════════════════════════════════════════════════════════════*/
-static VOID
-RdGetProcessName(
-    _Out_writes_(MaxChars) PWCHAR Buffer,
-    _In_ ULONG MaxChars
-)
-{
-    PEPROCESS process = PsGetCurrentProcess();
-    /* PsGetProcessImageFileName returns an 8-bit ANSI string (SEPROCESS internal).
-     * We convert to wide for our WCHAR buffer. */
-    PCHAR imageName = PsGetProcessImageFileName(process);
-    if (imageName) {
-        /* Simple ANSI → wide conversion (ASCII range only, sufficient for exe names) */
-        for (ULONG i = 0; i < MaxChars - 1 && imageName[i]; i++) {
-            Buffer[i] = (WCHAR)(UCHAR)imageName[i];
-        }
-        Buffer[MaxChars - 1] = L'\0';
-    } else {
-        wcsncpy_s(Buffer, MaxChars, L"unknown.exe", MaxChars - 1);
-    }
-}
+static VOID 
+RdGetProcessName( 
+    _Out_writes_(MaxChars) PWCHAR Buffer, 
+    _In_ ULONG MaxChars 
+) 
+{ 
+    if (Buffer == NULL || MaxChars == 0) { 
+        return; 
+    } 
 
+    Buffer[0] = L'u';
+    Buffer[1] = L'n';
+    Buffer[2] = L'k';
+    Buffer[3] = L'n';
+    Buffer[4] = L'o';
+    Buffer[5] = L'w';
+    Buffer[6] = L'n';
+    Buffer[7] = L'.';
+    Buffer[8] = L'e';
+    Buffer[9] = L'x';
+    Buffer[10] = L'e';
+    Buffer[11] = L'\0';
+}
 
 /* ══════════════════════════════════════════════════════════════════════════════
  * HELPER: Fill and send one event to user mode

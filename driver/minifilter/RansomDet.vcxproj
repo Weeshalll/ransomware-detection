@@ -33,7 +33,7 @@
     <Configuration>Debug</Configuration>
     <Platform>x64</Platform>
     <RootNamespace>RansomDet</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.28000.0</WindowsTargetPlatformVersion>
     <WindowsDriverTargetOsVersion>10.0</WindowsDriverTargetOsVersion>
     <WDKContentRoot>$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots@KitsRoot10)</WDKContentRoot>
   </PropertyGroup>
@@ -66,23 +66,31 @@
     <TargetExt>.sys</TargetExt>
     <EnableInf2cat>false</EnableInf2cat>
     <SignMode>TestSign</SignMode>
+    <SignHashAlgorithm>SHA256</SignHashAlgorithm>
+    <SignToolAdditionalOptions>/fd SHA256</SignToolAdditionalOptions>
   </PropertyGroup>
 
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>
-        _X86_=1;i386=1;STD_CALL;DBG=1;%(PreprocessorDefinitions)
-      </PreprocessorDefinitions>
+    <PreprocessorDefinitions>
+     STD_CALL;DBG=1;%(PreprocessorDefinitions)
+    </PreprocessorDefinitions>
+    <BufferSecurityCheck>false</BufferSecurityCheck>
+    <ControlFlowGuard>false</ControlFlowGuard>
+
       <AdditionalIncludeDirectories>
-        %(AdditionalIncludeDirectories)
-      </AdditionalIncludeDirectories>
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\km;
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\shared;
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um;
+  %(AdditionalIncludeDirectories)
+</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <WarnAsError>false</WarnAsError>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>fltmgr.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <EntryPointSymbol>DriverEntry</EntryPointSymbol>
-    </Link>
+  <AdditionalDependencies>fltmgr.lib;ntoskrnl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+  <EntryPointSymbol>DriverEntry</EntryPointSymbol>
+</Link>
     <Inf>
       <SpecifyDriverVerDirectiveDate>false</SpecifyDriverVerDirectiveDate>
     </Inf>

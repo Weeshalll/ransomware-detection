@@ -31,3 +31,10 @@ ml-model/plots/
 # VS Code / editor
 .vscode/
 .idea/
+
+
+
+# Windows kernel driver build output
+driver/minifilter/Debug/
+driver/minifilter/Release/
+*.backup
